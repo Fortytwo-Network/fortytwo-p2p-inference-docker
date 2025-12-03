@@ -16,8 +16,11 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /workspace
 
-ENV PATH_EXEC="/workspace/protocol"
-ENV MODULE_NAME="protocol"
+ARG PATH_EXEC="/workspace/protocol"
+ARG MODULE_NAME="protocol"
+
+ENV PATH_EXEC=${PATH_EXEC}
+ENV MODULE_NAME=${MODULE_NAME}
 
 COPY scripts/install.sh . 
 RUN chmod +x install.sh && sh ./install.sh

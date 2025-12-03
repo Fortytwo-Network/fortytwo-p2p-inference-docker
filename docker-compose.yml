@@ -36,9 +36,9 @@ services:
       FT_CAPSULE_MODEL_CACHE: /data
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://${FT_CAPSULE_HTTP_HOST}:${FT_CAPSULE_HTTP_PORT}/health" ]
-      interval: 5s
+      interval: 15s
       timeout: 5s
-      retries: 5
+      retries: 10
       start_period: 90s
     networks:
       - ft_capsule
