@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  fortytwo-protocol:
+    container_name: fortytwo-protocol
+    build:
+      context: .
+      dockerfile: Dockerfile.protocol
+    restart: always
+    environment:
+      FT_ACCOUNT_PRIVATE_KEY: ${FT_ACCOUNT_PRIVATE_KEY}
+      FT_NODE_LISTENER_PORT: ${FT_NODE_LISTENER_PORT}
+      FT_RPC_SERVICE_PORT: ${FT_RPC_SERVICE_PORT}
+      FT_CAPSULE_URL: 'http://fortytwo-capsule:${FT_CAPSULE_HTTP_PORT}/'
+    ports:
+      - "${FT_NODE_LISTENER_PORT}:${FT_NODE_LISTENER_PORT}"
+      - "${FT_RPC_SERVICE_PORT}:${FT_RPC_SERVICE_PORT}"
+    depends_on:
+      fortytwo-capsule:
+        condition: service_healthy
+    networks:
+      - ft_capsule
+  fortytwo-capsule:
+    container_name: fortytwo-capsule
+    build:
+      context: .
+      dockerfile: Dockerfile.capsule
+    restart: always
+    volumes:
+      - ${INPUT_MODEL_CACHE}:/data
+    environment:
+      FT_CAPSULE_HTTP_PORT: ${FT_CAPSULE_HTTP_PORT}
+      FT_CAPSULE_HTTP_HOST: ${FT_CAPSULE_HTTP_HOST}
+      FT_CAPSULE_LLM_HF_REPO: ${FT_CAPSULE_LLM_HF_REPO}
+      FT_CAPSULE_LLM_HF_MODEL_NAME: ${FT_CAPSULE_LLM_HF_MODEL_NAME}
+      FT_CAPSULE_MODEL_CACHE: /data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://${FT_CAPSULE_HTTP_HOST}:${FT_CAPSULE_HTTP_PORT}/health" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 90s
+    networks:
+      - ft_capsule
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['all']
+              capabilities:
+                - gpu
+networks:
+  ft_capsule:
