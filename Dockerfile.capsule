@@ -1,0 +1,29 @@
+# sha256:af8bd179ed3bf69d4b63b19a763662a6141f0f62ef099283f68d0b14b4bab0e3
+FROM nvidia/cuda:12.4.0-runtime-ubuntu22.04
+
+
+LABEL network.fortytwo.image.title="Capsule"
+LABEL network.fortytwo.image.authors="Aleksei Ivashov <aivashov@fortytwo.network>"
+LABEL network.fortytwo.image.vendor="Fortytwo Network"
+LABEL network.fortytwo.image.url="https://fortytwo.network"
+LABEL network.fortytwo.image.source="https://github.com/Fortytwo-Network/fortytwo-node-setup"
+LABEL network.fortytwo.image.licenses="Apache 2.0"
+
+
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    libssl3 \
+    curl \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace
+
+ENV PATH_EXEC="/workspace/capsule"
+ENV MODULE_NAME="capsule"
+
+COPY scripts/install.sh . 
+RUN chmod +x install.sh && sh ./install.sh
+
+COPY scripts/cmd.sh . 
+CMD ["/bin/sh", "/workspace/cmd.sh"]

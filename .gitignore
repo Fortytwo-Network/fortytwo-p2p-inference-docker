@@ -1,0 +1,4 @@
+.vscode
+.idea
+.env
+model_cache/*
