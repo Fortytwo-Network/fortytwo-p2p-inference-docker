@@ -10,11 +10,9 @@ services:
     environment:
       FT_ACCOUNT_PRIVATE_KEY: ${FT_ACCOUNT_PRIVATE_KEY}
       FT_NODE_LISTENER_PORT: ${FT_NODE_LISTENER_PORT}
-      FT_RPC_SERVICE_PORT: ${FT_RPC_SERVICE_PORT}
       FT_CAPSULE_URL: 'http://fortytwo-capsule:${FT_CAPSULE_HTTP_PORT}/'
     ports:
       - "${FT_NODE_LISTENER_PORT}:${FT_NODE_LISTENER_PORT}"
-      - "${FT_RPC_SERVICE_PORT}:${FT_RPC_SERVICE_PORT}"
     depends_on:
       fortytwo-capsule:
         condition: service_healthy
