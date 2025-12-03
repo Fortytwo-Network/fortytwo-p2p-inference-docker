@@ -35,7 +35,7 @@ download-llm:
 	@if [ -z "$(LLM_HF_REPO)" ]; then echo "No LLM_HF_REPO provided. Use: make download-llm LLM_HF_REPO=... LLM_HF_MODEL_NAME=..."; exit 1; fi
 	@if [ -z "$(LLM_HF_MODEL_NAME)" ]; then echo "No LLM_HF_MODEL_NAME provided. Use: make download-llm LLM_HF_REPO=... LLM_HF_MODEL_NAME=..."; exit 1; fi
 	@echo "Downloading model $(LLM_HF_MODEL_NAME) from $(LLM_HF_REPO) to $(INPUT_MODEL_CACHE) (you can set the path to the model cache in the .env INPUT_MODEL_CACHE=)"
-	@docker run --rm \
+	@docker run --rm -it \
 		-v $(INPUT_MODEL_CACHE):/cache \
 		$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG) \
 		/workspace/utils --hf-repo "$(LLM_HF_REPO)" --hf-model-name "$(LLM_HF_MODEL_NAME)" --model-cache "/cache"
