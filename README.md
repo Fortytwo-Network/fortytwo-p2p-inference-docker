@@ -1,5 +1,9 @@
 # fortytwo-node-setup
 
+## System Requirements
+- Nvidia graphic card
+- Cpu x86_64
+
 ## Requirements
 1. Docker and docker compose 
 2. [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
@@ -146,9 +150,9 @@ deploy:
 Start each node using its respective compose file and environment file:
 
 ```bash
-docker compose -f docker-compose-vibethinker.yml --env-file .env.vibethinker up -d
-docker compose -f docker-compose-rust_coder.yml --env-file .env.rust_coder up -d
-docker compose -f docker-compose-qwen.yml --env-file .env.qwen up -d
+docker compose -f docker-compose-vibethinker.yml --env-file .env.vibethinker -p vibethinker up -d
+docker compose -f docker-compose-rust_coder.yml --env-file .env.rust_coder -p rust_coder up -d
+docker compose -f docker-compose-qwen.yml --env-file .env.qwen -p qwen up -d
 ```
 
 ### Verification

@@ -2,7 +2,6 @@ version: "3.9"
 
 services:
   fortytwo-protocol:
-    container_name: fortytwo-protocol
     build:
       context: .
       dockerfile: Dockerfile.protocol
@@ -19,7 +18,6 @@ services:
     networks:
       - ft_capsule
   fortytwo-capsule:
-    container_name: fortytwo-capsule
     build:
       context: .
       dockerfile: Dockerfile.capsule

@@ -5,7 +5,7 @@ LABEL network.fortytwo.image.title="Protocol Node"
 LABEL network.fortytwo.image.authors="Aleksei Ivashov <aivashov@fortytwo.network>"
 LABEL network.fortytwo.image.vendor="Fortytwo Network"
 LABEL network.fortytwo.image.url="https://fortytwo.network"
-LABEL network.fortytwo.image.source="https://github.com/Fortytwo-Network/fortytwo-node-setup"
+LABEL network.fortytwo.image.source="https://github.com/Fortytwo-Network/fortytwo-inference-node-setup"
 LABEL network.fortytwo.image.licenses="Apache 2.0"
 
 RUN apt-get update && apt-get install -y \
