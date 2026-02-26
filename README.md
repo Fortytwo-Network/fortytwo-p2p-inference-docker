@@ -1,4 +1,4 @@
-# Fortytwo Inference Node: Fortytwo Container
+# Fortytwo P2P Inference Node: Fortytwo P2P Container
 
 This is the Fortytwo Inference Node designed to run with Docker.
 
