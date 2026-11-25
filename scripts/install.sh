@@ -1,4 +1,9 @@
 #!/bin/sh
+
+# Retirement guard: stop before downloads or changes to the host.
+printf '%s\n' "Fortytwo's Hitchhiking to AGI program has concluded and Fortytwo nodes are not running. Please do not install or run this software. News: https://x.com/fortytwo" >&2
+exit 1
+
 set -e
 
 PATH_EXEC="${PATH_EXEC}"
